@@ -39,6 +39,7 @@ function modalOpen(e) {
         }
     });
     console.log(activeIndex);
+    console.log(galleryItems[activeIndex].original);
 
     window.addEventListener('keydown', closeByEscape);
     window.addEventListener('keydown', changeByArrows);
@@ -65,14 +66,26 @@ function closeByEscape(e) {
     closeModal(e);
 }
 
-function changeByArrows (e) {
+function changeByArrows(e) {
     if (e.key === 'ArrowRight' && activeIndex < galleryItems.length -1) {
         activeIndex += 1;
-        refs.lightbox__image.src = galleryItems[activeIndex].original;
+        refs.lightboxImage.src = galleryItems[activeIndex].original;
+        return;
     }
     if (e.key === 'ArrowLeft' && activeIndex > 0) {
         activeIndex -= 1;
-        refs.lightbox__image.src = galleryItems[activeIndex].original;
+        refs.lightboxImage.src = galleryItems[activeIndex].original;
+        return;
+    }
+    if (e.key === 'ArrowRight' && activeIndex === galleryItems.length -1) {
+        activeIndex = 0;
+        refs.lightboxImage.src = galleryItems[activeIndex].original;
+        return;
+    }
+    if (e.key === 'ArrowLeft' && activeIndex === 0) {
+        activeIndex = galleryItems.length -1;
+        refs.lightboxImage.src = galleryItems[activeIndex].original;
+        return;
     }
 }
 
